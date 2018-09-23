@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>付款</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js
+"></script>
+</head>
+<body>
+<h5>余额<span id="amount">&&&amount&&&</span></h5>
+<button id="button">付款</button>
+<script type="text/javascript">
+$(button).on('click',function(){
+	$.ajax({
+        url : "http://king.com:8002/pay",
+        dataType : "jsonp",//数据类型为jsonp
+        success : function(response){
+        	if(response === 'success'){
+				amount.innerText = amount.innerText - 1
+			}
+        }
+    });
+})
+</script>
+<!-- <script type="text/javascript">
+	button.addEventListener('click',(e)=>{
+		let script = document.createElement('script')
+		let funcName = 'king'+parseInt(Math.random()*100000,10)//随机名，例：ry123455675
+		window[funcName] = function(result){
+			if(result === 'success'){
+				amount.innerText = amount.innerText - 1
+			}else{
+
+			}
+		}
+		script.src = 'http://king.com:8002/pay?callback=' + funcName
+		document.body.appendChild(script)
+		script.onload = function(e){
+			e.currentTarget.remove()
+			delete window[funcName]
+		}
+		script.onerror = function(){
+			alert('fail')
+			e.currentTarget.remove()
+			delete window[funcName]
+		}
+
+
+
+
+		/*let image = document.createElement('img')
+		image.src = '/pay'
+		image.onload = function(){
+			alert('付款成功')
+			amount.innerText = amount.innerText - 1  //不用刷新
+			// window.location.reload()  //属性页面
+		}
+		image.onerror = function(){
+			alert('付款失败')
+		}*/
+	})
+</script> -->
+<!-- 方法二 -->
+<!-- <form action="/pay" method="post">
+	<input type="submit" value="付款">
+</form> -->
+
+<!-- 方法一 -->
+<!-- <h5>余额<span id="amount">&&&amount&&&</span></h5>
+<button id="button">付款1元</button>
+<script type="text/javascript">
+	button.addEventListener('click',function(){
+		let n = amount.innerText
+		let number = parseInt(n,10)
+		let newNumber = number - 1
+		amount.innerText = newNumber
+	})
+</script>
+-->
+<!-- <script type="text/javascript" src="main.js"></script> -->
+</body>
+</html>
